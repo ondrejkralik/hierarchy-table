@@ -32,16 +32,17 @@ class TableRow extends React.Component {
                         </td>
                         : <td>&nbsp;</td>}
 
-                    {Object.entries(this.props.value.data).map((property, index) => {
-                        return <td key={index}>{property[1]}</td>;
+                    {this.props.columns.map((columnName, index) => {
+                        return <td key={index}>{this.props.value.data[columnName]}</td>
                     })}
+
                     <td onClick={this.props.onDelete.bind(this)} className="clickable" title="Delete">&#10006;</td>
                 </tr>
 
                 {hasKids && this.state.expand
                     && (
                         <tr className="kids">
-                            <td colSpan={this.props.columns + 2}>
+                            <td colSpan={this.props.columns.length + 2}>
                                 <Table
                                     title={Object.keys(this.props.value.kids)[0]}
                                     value={this.props.value.kids[Object.keys(this.props.value.kids)[0]].records}
@@ -57,7 +58,7 @@ class TableRow extends React.Component {
 }
 
 TableRow.propTypes = {
-    columns: PropTypes.number.isRequired,
+    columns: PropTypes.arrayOf(PropTypes.string).isRequired,
     value: PropTypes.shape({
         data: PropTypes.object,
         kids: PropTypes.object
