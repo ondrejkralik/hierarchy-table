@@ -1,0 +1,10 @@
+
+.table thead td {
+    background-color: #039286;
+    color: #fff;
+}
+
+.table thead th {
+    background-color: #00a698;
+    color: #fff;
+}
